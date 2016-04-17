@@ -1,0 +1,275 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B611D9901CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B611D98B1CC39ED700D3BA8C /* QCIRCReceiver.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCIRCReceiver.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		B611D98E1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCIRCReceiverPlugIn.h; sourceTree = "<group>"; };
+		B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCIRCReceiverPlugIn.m; sourceTree = "<group>"; };
+		B611D9911CC39ED700D3BA8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B611D9871CC39ED700D3BA8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B611D9811CC39ED700D3BA8C = {
+			isa = PBXGroup;
+			children = (
+				B611D98D1CC39ED700D3BA8C /* QCIRCReceiver */,
+				B611D98C1CC39ED700D3BA8C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B611D98C1CC39ED700D3BA8C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B611D98B1CC39ED700D3BA8C /* QCIRCReceiver.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B611D98D1CC39ED700D3BA8C /* QCIRCReceiver */ = {
+			isa = PBXGroup;
+			children = (
+				B611D98E1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.h */,
+				B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */,
+				B611D9911CC39ED700D3BA8C /* Info.plist */,
+			);
+			path = QCIRCReceiver;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B611D98A1CC39ED700D3BA8C /* QCIRCReceiver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B611D9941CC39ED700D3BA8C /* Build configuration list for PBXNativeTarget "QCIRCReceiver" */;
+			buildPhases = (
+				B611D9861CC39ED700D3BA8C /* Sources */,
+				B611D9871CC39ED700D3BA8C /* Frameworks */,
+				B611D9881CC39ED700D3BA8C /* Resources */,
+				B611D9891CC39ED700D3BA8C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QCIRCReceiver;
+			productName = QCIRCReceiver;
+			productReference = B611D98B1CC39ED700D3BA8C /* QCIRCReceiver.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B611D9821CC39ED700D3BA8C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = MacPietsApps.net;
+				TargetAttributes = {
+					B611D98A1CC39ED700D3BA8C = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = B611D9851CC39ED700D3BA8C /* Build configuration list for PBXProject "QCIRCReceiver" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B611D9811CC39ED700D3BA8C;
+			productRefGroup = B611D98C1CC39ED700D3BA8C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B611D98A1CC39ED700D3BA8C /* QCIRCReceiver */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B611D9881CC39ED700D3BA8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B611D9891CC39ED700D3BA8C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/QCIRCReceiver.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/QCIRCReceiver.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B611D9861CC39ED700D3BA8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B611D9901CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B611D9921CC39ED700D3BA8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B611D9931CC39ED700D3BA8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B611D9951CC39ED700D3BA8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_BUNDLE_IDENTIFIER = net.macpietsapps.QCIRCReceiver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		B611D9961CC39ED700D3BA8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_BUNDLE_IDENTIFIER = net.macpietsapps.QCIRCReceiver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B611D9851CC39ED700D3BA8C /* Build configuration list for PBXProject "QCIRCReceiver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B611D9921CC39ED700D3BA8C /* Debug */,
+				B611D9931CC39ED700D3BA8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B611D9941CC39ED700D3BA8C /* Build configuration list for PBXNativeTarget "QCIRCReceiver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B611D9951CC39ED700D3BA8C /* Debug */,
+				B611D9961CC39ED700D3BA8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B611D9821CC39ED700D3BA8C /* Project object */;
+}
