@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B611D9901CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */; };
+		B611D99D1CC3A21500D3BA8C /* IRCAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D9981CC3A21500D3BA8C /* IRCAsyncSocket.m */; };
+		B611D99E1CC3A21500D3BA8C /* IRCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D99A1CC3A21500D3BA8C /* IRCConnection.m */; };
+		B611D99F1CC3A21500D3BA8C /* IRCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D99C1CC3A21500D3BA8C /* IRCMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -15,6 +18,12 @@
 		B611D98E1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCIRCReceiverPlugIn.h; sourceTree = "<group>"; };
 		B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCIRCReceiverPlugIn.m; sourceTree = "<group>"; };
 		B611D9911CC39ED700D3BA8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B611D9971CC3A21500D3BA8C /* IRCAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCAsyncSocket.h; sourceTree = "<group>"; };
+		B611D9981CC3A21500D3BA8C /* IRCAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCAsyncSocket.m; sourceTree = "<group>"; };
+		B611D9991CC3A21500D3BA8C /* IRCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCConnection.h; sourceTree = "<group>"; };
+		B611D99A1CC3A21500D3BA8C /* IRCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCConnection.m; sourceTree = "<group>"; };
+		B611D99B1CC3A21500D3BA8C /* IRCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCMessage.h; sourceTree = "<group>"; };
+		B611D99C1CC3A21500D3BA8C /* IRCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCMessage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,11 +56,33 @@
 		B611D98D1CC39ED700D3BA8C /* QCIRCReceiver */ = {
 			isa = PBXGroup;
 			children = (
+				B6D05B811CC40A64001A08EC /* GCDAsyncSocket */,
+				B6D05B821CC40A7D001A08EC /* IRC Classes */,
 				B611D98E1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.h */,
 				B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */,
 				B611D9911CC39ED700D3BA8C /* Info.plist */,
 			);
 			path = QCIRCReceiver;
+			sourceTree = "<group>";
+		};
+		B6D05B811CC40A64001A08EC /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				B611D9971CC3A21500D3BA8C /* IRCAsyncSocket.h */,
+				B611D9981CC3A21500D3BA8C /* IRCAsyncSocket.m */,
+			);
+			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+		B6D05B821CC40A7D001A08EC /* IRC Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B611D9991CC3A21500D3BA8C /* IRCConnection.h */,
+				B611D99A1CC3A21500D3BA8C /* IRCConnection.m */,
+				B611D99B1CC3A21500D3BA8C /* IRCMessage.h */,
+				B611D99C1CC3A21500D3BA8C /* IRCMessage.m */,
+			);
+			name = "IRC Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +168,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B611D99E1CC3A21500D3BA8C /* IRCConnection.m in Sources */,
+				B611D99D1CC3A21500D3BA8C /* IRCAsyncSocket.m in Sources */,
+				B611D99F1CC3A21500D3BA8C /* IRCMessage.m in Sources */,
 				B611D9901CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +302,7 @@
 				B611D9961CC39ED700D3BA8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,24 @@
+#QCIRCReceiver
+QCReceiver is a simple QuartzComposer PlugIn that connects to an IRC server, joins a channel and outputs new messages.
+
+##Installation
+`Build & Run` the project in Xcode. This will cause the PlugIn to be automatically installed in the right directories for use in QuartzComposer.
+
+##Usage
+Drag and Drop the **IRC Receiver** patch from the patch library inside QuartzCompser into your document. Setup your server, port, nickname and channel (optionally if the server requires a password you can set that too). New messages for that channel will be output once they are received. A new message will only appear on the output for one render cycle (check the `New Message Signal` output of the patch).
+
+##Known issues
+*    Only one message gets handled per frame. This means messages can get lost
+*    The code could need some more clean up
+*    Ideally the output should be an `QC_STRUCTURE` of the last *x* messages received
+*    Error handling. None is done yet.
+
+##License
+```
+Copyright (c) 2016 Peter Kraml, macpietsapps.net
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+QCIRCReceiver uses [CocoaAsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket) (which was renamed to IRCAsyncSocket in this project due to namespacing issues) which is public domain.

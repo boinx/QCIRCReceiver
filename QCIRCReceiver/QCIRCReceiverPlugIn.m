@@ -6,53 +6,94 @@
 //  Copyright © 2016 MacPietsApps.net. All rights reserved.
 //
 
-// It's highly recommended to use CGL macros instead of changing the current context for plug-ins that perform OpenGL rendering
-#import <OpenGL/CGLMacro.h>
 
 #import "QCIRCReceiverPlugIn.h"
 
-#define	kQCPlugIn_Name				@"QCIRCReceiver"
-#define	kQCPlugIn_Description		@"QCIRCReceiver description"
+#import "IRCConnection.h"
+#import "IRCMessage.h"
+
+#define	kQCPlugIn_Name				@"IRC Receiver"
+#define	kQCPlugIn_Description		@"Pushes new messages from an IRC Channel out"
+
+@interface QCIRCReceiverPlugIn ()
+
+@property (nonatomic, strong) IRCConnection *connection;
+@property (nonatomic, strong) NSDictionary *nextMessage;
+
+@property (nonatomic, assign) NSUInteger oldPort;
+@property (nonatomic, strong) NSString *oldServer;
+@property (nonatomic, strong) NSString *oldNickname;
+@property (nonatomic, strong) NSString *oldChannel;
+@property (nonatomic, strong) NSString *oldPassword;
+
+@end
 
 @implementation QCIRCReceiverPlugIn
 
-// Here you need to declare the input / output properties as dynamic as Quartz Composer will handle their implementation
-//@dynamic inputFoo, outputBar;
+@dynamic inputServer, inputPort, inputNickname, inputPassword, inputChannel;
+@dynamic outputNewMessage, outputMessageText, outputNickname, outputConnected;
 
 + (NSDictionary *)attributes
 {
-	// Return a dictionary of attributes describing the plug-in (QCPlugInAttributeNameKey, QCPlugInAttributeDescriptionKey...).
     return @{QCPlugInAttributeNameKey:kQCPlugIn_Name, QCPlugInAttributeDescriptionKey:kQCPlugIn_Description};
 }
 
 + (NSDictionary *)attributesForPropertyPortWithKey:(NSString *)key
 {
-	// Specify the optional attributes for property based ports (QCPortAttributeNameKey, QCPortAttributeDefaultValueKey...).
+	if ([key isEqualToString:@"inputServer"])
+	{
+		return @{QCPortAttributeNameKey: @"Server",
+				 QCPortAttributeDefaultValueKey: @"irc.chat.twitch.tv"};
+	}
+	else if ([key isEqualToString:@"inputPort"])
+	{
+		return @{QCPortAttributeNameKey: @"Port",
+				 QCPortAttributeDefaultValueKey: @(6667)};
+	}
+	else if ([key isEqualToString:@"inputNickname"])
+	{
+		return @{QCPortAttributeNameKey: @"Nickname",
+				 QCPortAttributeDefaultValueKey: @""};
+	}
+	else if ([key isEqualToString:@"inputPassword"])
+	{
+		return @{QCPortAttributeNameKey: @"Server Password",
+				 QCPortAttributeDefaultValueKey: @""};
+	}
+	else if ([key isEqualToString:@"inputChannel"])
+	{
+		return @{QCPortAttributeNameKey: @"IRC Channel",
+				 QCPortAttributeDefaultValueKey: @"#macpiets"};
+	}
+	else if ([key isEqualToString:@"outputNewMessage"])
+	{
+		return @{QCPortAttributeNameKey: @"New Message Signal"};
+	}
+	else if ([key isEqualToString:@"outputMessageText"])
+	{
+		return @{QCPortAttributeNameKey: @"Message Text"};
+	}
+	else if ([key isEqualToString:@"outputNickname"])
+	{
+		return @{QCPortAttributeNameKey: @"IRC Nickname"};
+	}
+	else if ([key isEqualToString:@"outputConnected"])
+	{
+		return @{QCPortAttributeNameKey: @"Connected"};
+	}
+	
 	return nil;
 }
 
 + (QCPlugInExecutionMode)executionMode
 {
-	// Return the execution mode of the plug-in: kQCPlugInExecutionModeProvider, kQCPlugInExecutionModeProcessor, or kQCPlugInExecutionModeConsumer.
-	return kQCPlugInExecutionModeProcessor;
+	return kQCPlugInExecutionModeProvider;
 }
 
 + (QCPlugInTimeMode)timeMode
 {
-	// Return the time dependency mode of the plug-in: kQCPlugInTimeModeNone, kQCPlugInTimeModeIdle or kQCPlugInTimeModeTimeBase.
-	return kQCPlugInTimeModeNone;
+	return kQCPlugInTimeModeIdle;
 }
-
-- (instancetype)init
-{
-	self = [super init];
-	if (self) {
-		// Allocate any permanent resource required by the plug-in.
-	}
-	
-	return self;
-}
-
 
 @end
 
@@ -60,9 +101,6 @@
 
 - (BOOL)startExecution:(id <QCPlugInContext>)context
 {
-	// Called by Quartz Composer when rendering of the composition starts: perform any required setup for the plug-in.
-	// Return NO in case of fatal failure (this will prevent rendering of the composition to start).
-	
 	return YES;
 }
 
@@ -73,26 +111,60 @@
 
 - (BOOL)execute:(id <QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary *)arguments
 {
-	/*
-	Called by Quartz Composer whenever the plug-in instance needs to execute.
-	Only read from the plug-in inputs and produce a result (by writing to the plug-in outputs or rendering to the destination OpenGL context) within that method and nowhere else.
-	Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
+	if (self.oldPort != self.inputPort || ![self.oldServer isEqualToString:self.inputServer] || ![self.oldNickname isEqualToString:self.inputNickname] || ![self.oldChannel isEqualToString:self.inputChannel] || ![self.oldPassword isEqualToString:self.inputPassword] || !self.connection.connected)
+	{
+		self.connection = nil;
+	}
 	
-	The OpenGL context for rendering can be accessed and defined for CGL macros using:
-	CGLContextObj cgl_ctx = [context CGLContextObj];
-	*/
+	if (!self.connection && self.inputPort > 0 && ![self.inputServer isEqualToString:@""] && ![self.inputNickname isEqualToString:@""] && ![self.inputChannel isEqualToString:@""])
+	{
+		NSString *password = nil;
+		
+		if (![self.inputPassword isEqualToString:@""])
+		{
+			password = self.inputPassword;
+		}
+		
+		IRCConnection *connection = [[IRCConnection alloc] initWithServer:self.inputServer port:self.inputPort serverPassword:password];
+		connection.nickname = self.inputNickname;
+		[connection joinChannel:self.inputChannel];
+		connection.messageCallback = ^void(IRCMessage * _Nonnull message) {
+			self.nextMessage = @{@"nick": message.senderNickname, @"message": message.message};
+		};
+		self.connection = connection;
+		
+		self.oldPort = self.inputPort;
+		self.oldServer = self.inputServer;
+		self.oldNickname = self.inputNickname;
+		self.oldChannel = self.inputChannel;
+		self.oldPassword = self.inputPassword;
+	}
+	
+	self.outputNewMessage = NO;
+	self.outputConnected = self.connection && self.connection.connected;
+	
+	if (self.nextMessage)
+	{
+		self.outputNewMessage = YES;
+		self.outputMessageText = self.nextMessage[@"message"];
+		self.outputNickname = self.nextMessage[@"nick"];
+		
+		self.nextMessage = nil;
+	}
 	
 	return YES;
 }
 
 - (void)disableExecution:(id <QCPlugInContext>)context
 {
-	// Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
+	self.connection = nil;
+	self.outputConnected = NO;
 }
 
 - (void)stopExecution:(id <QCPlugInContext>)context
 {
-	// Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
+	self.connection = nil;
+	self.outputConnected = NO;
 }
 
 @end

@@ -10,8 +10,15 @@
 
 @interface QCIRCReceiverPlugIn : QCPlugIn
 
-// Declare here the properties to be used as input and output ports for the plug-in e.g.
-//@property double inputFoo;
-//@property (copy) NSString* outputBar;
+@property (copy) NSString *inputServer;
+@property NSUInteger inputPort;
+@property (copy) NSString *inputNickname;
+@property (copy) NSString *inputPassword;
+@property (copy) NSString *inputChannel;
+
+@property (copy) NSString *outputMessageText;
+@property (copy) NSString *outputNickname;
+@property BOOL outputNewMessage;
+@property BOOL outputConnected;
 
 @end
