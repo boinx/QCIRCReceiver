@@ -10,15 +10,15 @@
 
 @interface QCIRCReceiverPlugIn : QCPlugIn
 
-@property (copy) NSString *inputServer;
+//Inputs
 @property NSUInteger inputPort;
+@property (copy) NSString *inputServer;
 @property (copy) NSString *inputNickname;
 @property (copy) NSString *inputPassword;
 @property (copy) NSString *inputChannel;
 
-@property (copy) NSString *outputMessageText;
-@property (copy) NSString *outputNickname;
-@property BOOL outputNewMessage;
+//Outputs
+@property (copy) NSArray *outputMessages;
 @property BOOL outputConnected;
 
 @end

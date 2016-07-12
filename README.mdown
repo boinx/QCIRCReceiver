@@ -5,12 +5,10 @@ QCReceiver is a simple QuartzComposer PlugIn that connects to an IRC server, joi
 `Build & Run` the project in Xcode. This will cause the PlugIn to be automatically installed in the right directories for use in QuartzComposer.
 
 ##Usage
-Drag and Drop the **IRC Receiver** patch from the patch library inside QuartzCompser into your document. Setup your server, port, nickname and channel (optionally if the server requires a password you can set that too). New messages for that channel will be output once they are received. A new message will only appear on the output for one render cycle (check the `New Message Signal` output of the patch).
+Drag and Drop the **IRC Receiver** patch from the patch library inside QuartzCompser into your document. Setup your server, port, nickname and channel (optionally if the server requires a password you can set that too). New messages for that channel will be added to the *Messages* output which contains the last 100 received messages (each message is a dictionary with the senders nickname, the message contents, a UNIX timestamp when the message was received and the channel it was received in)
 
 ##Known issues
-*    Only one message gets handled per frame. This means messages can get lost
 *    The code could need some more clean up
-*    Ideally the output should be an `QC_STRUCTURE` of the last *x* messages received
 *    Error handling. None is done yet.
 
 ##License
