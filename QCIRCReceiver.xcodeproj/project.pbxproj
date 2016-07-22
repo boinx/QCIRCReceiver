@@ -6,12 +6,37 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		B677B8111D4200BD00587500 /* Build and Install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B677B8121D4200BD00587500 /* Build configuration list for PBXAggregateTarget "Build and Install" */;
+			buildPhases = (
+				B677B8171D4200C500587500 /* Install Script */,
+			);
+			dependencies = (
+				B677B8161D4200C300587500 /* PBXTargetDependency */,
+			);
+			name = "Build and Install";
+			productName = "Build and Install";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		B611D9901CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D98F1CC39ED700D3BA8C /* QCIRCReceiverPlugIn.m */; };
 		B611D99D1CC3A21500D3BA8C /* IRCAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D9981CC3A21500D3BA8C /* IRCAsyncSocket.m */; };
 		B611D99E1CC3A21500D3BA8C /* IRCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D99A1CC3A21500D3BA8C /* IRCConnection.m */; };
 		B611D99F1CC3A21500D3BA8C /* IRCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B611D99C1CC3A21500D3BA8C /* IRCMessage.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B677B8151D4200C300587500 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B611D9821CC39ED700D3BA8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B611D98A1CC39ED700D3BA8C;
+			remoteInfo = QCIRCReceiver;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B611D98B1CC39ED700D3BA8C /* QCIRCReceiver.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCIRCReceiver.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +49,8 @@
 		B611D99A1CC3A21500D3BA8C /* IRCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCConnection.m; sourceTree = "<group>"; };
 		B611D99B1CC3A21500D3BA8C /* IRCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCMessage.h; sourceTree = "<group>"; };
 		B611D99C1CC3A21500D3BA8C /* IRCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCMessage.m; sourceTree = "<group>"; };
+		B677B80A1D41FDF700587500 /* BuildNumber.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = BuildNumber.xcconfig; sourceTree = "<group>"; };
+		B677B80D1D41FDF700587500 /* BuildNumber.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = BuildNumber.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +67,8 @@
 		B611D9811CC39ED700D3BA8C = {
 			isa = PBXGroup;
 			children = (
+				B677B8091D41FDF700587500 /* Config */,
+				B677B80C1D41FDF700587500 /* Scripts */,
 				B611D98D1CC39ED700D3BA8C /* QCIRCReceiver */,
 				B611D98C1CC39ED700D3BA8C /* Products */,
 			);
@@ -63,6 +92,22 @@
 				B611D9911CC39ED700D3BA8C /* Info.plist */,
 			);
 			path = QCIRCReceiver;
+			sourceTree = "<group>";
+		};
+		B677B8091D41FDF700587500 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				B677B80A1D41FDF700587500 /* BuildNumber.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		B677B80C1D41FDF700587500 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				B677B80D1D41FDF700587500 /* BuildNumber.sh */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		B6D05B811CC40A64001A08EC /* GCDAsyncSocket */ = {
@@ -94,8 +139,6 @@
 			buildPhases = (
 				B611D9861CC39ED700D3BA8C /* Sources */,
 				B611D9871CC39ED700D3BA8C /* Frameworks */,
-				B611D9881CC39ED700D3BA8C /* Resources */,
-				B611D9891CC39ED700D3BA8C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -118,6 +161,9 @@
 					B611D98A1CC39ED700D3BA8C = {
 						CreatedOnToolsVersion = 7.3;
 					};
+					B677B8111D4200BD00587500 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = B611D9851CC39ED700D3BA8C /* Build configuration list for PBXProject "QCIRCReceiver" */;
@@ -133,33 +179,25 @@
 			projectRoot = "";
 			targets = (
 				B611D98A1CC39ED700D3BA8C /* QCIRCReceiver */,
+				B677B8111D4200BD00587500 /* Build and Install */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		B611D9881CC39ED700D3BA8C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXShellScriptBuildPhase section */
-		B611D9891CC39ED700D3BA8C /* ShellScript */ = {
+		B677B8171D4200C500587500 /* Install Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Install Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/QCIRCReceiver.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/QCIRCReceiver.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/OrientatorReceiver.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/OrientatorReceiver.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -176,6 +214,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B677B8161D4200C300587500 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B611D98A1CC39ED700D3BA8C /* QCIRCReceiver */;
+			targetProxy = B677B8151D4200C300587500 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B611D9921CC39ED700D3BA8C /* Debug */ = {
@@ -215,7 +261,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -253,7 +299,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -261,25 +307,46 @@
 		};
 		B611D9951CC39ED700D3BA8C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B677B80A1D41FDF700587500 /* BuildNumber.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				PRODUCT_BUNDLE_IDENTIFIER = net.macpietsapps.QCIRCReceiver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
 		};
 		B611D9961CC39ED700D3BA8C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B677B80A1D41FDF700587500 /* BuildNumber.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				PRODUCT_BUNDLE_IDENTIFIER = net.macpietsapps.QCIRCReceiver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		B677B8131D4200BD00587500 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B677B8141D4200BD00587500 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -303,6 +370,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B677B8121D4200BD00587500 /* Build configuration list for PBXAggregateTarget "Build and Install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B677B8131D4200BD00587500 /* Debug */,
+				B677B8141D4200BD00587500 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
