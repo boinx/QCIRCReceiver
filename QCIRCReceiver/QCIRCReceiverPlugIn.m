@@ -45,7 +45,7 @@
 	if ([key isEqualToString:@"inputServer"])
 	{
 		return @{QCPortAttributeNameKey: @"Server",
-				 QCPortAttributeDefaultValueKey: @"irc.chat.twitch.tv"};
+				 QCPortAttributeDefaultValueKey: @""};
 	}
 	else if ([key isEqualToString:@"inputPort"])
 	{
@@ -65,7 +65,7 @@
 	else if ([key isEqualToString:@"inputChannel"])
 	{
 		return @{QCPortAttributeNameKey: @"IRC Channel",
-				 QCPortAttributeDefaultValueKey: @"#macpiets"};
+				 QCPortAttributeDefaultValueKey: @""};
 	}
 	else if ([key isEqualToString:@"outputMessages"])
 	{
