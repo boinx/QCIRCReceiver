@@ -16,6 +16,9 @@
 @property (nonatomic, strong) IRCAsyncSocket *socket;
 @property (nonatomic, strong) NSMutableArray *messageQueue;
 
+@property (nonatomic, assign) IRCConnectionState connectionState;
+@property (atomic, strong) NSString * _Nullable connectionError;
+
 @end
 
 @implementation IRCConnection
@@ -26,6 +29,8 @@
 	if (self)
 	{
 		self.messageQueue = [NSMutableArray array];
+		
+		self.connectionState = IRCConnectionStateDisconnected;
 
 		IRCAsyncSocket *socket = [[IRCAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
 		
@@ -33,10 +38,15 @@
 		[socket connectToHost:server onPort:port error:&error];
 		if (error)
 		{
+			self.connectionState = IRCConnectionStateConnectionError;
+			self.connectionError = error.localizedDescription;
+			
 			NSLog(@"Error while connecting to server: %@", error);
 		}
 		else
 		{
+			self.connectionState = IRCConnectionStateConnecting;
+
 			self.socket = socket;
 		
 			if (password)
@@ -82,12 +92,16 @@
 
 - (void)socket:(IRCAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
+	self.connectionState = IRCConnectionStateConnected;
+
 	[self _workMessageQueue];
 	[sock readDataToData:IRCAsyncSocket.CRLFData withTimeout:-1 tag:0];
 }
 
 - (void)socket:(IRCAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
+	self.connectionState = IRCConnectionStateReceivingData;
+
 	//Parse message
 	IRCMessage *message = [[IRCMessage alloc] initWithData:data];
 	
@@ -109,6 +123,16 @@
 
 - (void)socketDidDisconnect:(IRCAsyncSocket *)sock withError:(NSError *)err
 {
+	if(err)
+	{
+		self.connectionState = IRCConnectionStateConnectionError;
+		self.connectionError = err.localizedDescription;
+	}
+	else
+	{
+		self.connectionState = IRCConnectionStateDisconnected;
+	}
+	
 	self.socket = nil;
 	[self.messageQueue removeAllObjects];
 }

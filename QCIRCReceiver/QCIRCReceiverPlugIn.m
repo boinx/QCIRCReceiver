@@ -31,8 +31,8 @@
 
 @implementation QCIRCReceiverPlugIn
 
-@dynamic inputServer, inputPort, inputNickname, inputPassword, inputChannel;
-@dynamic outputMessages, outputConnected;
+@dynamic inputServer, inputPort, inputNickname, inputPassword, inputChannel, inputReconnect;
+@dynamic outputMessages, outputConnected, outputConnectionState, outputConnectionError;
 
 + (NSDictionary *)attributes
 {
@@ -67,6 +67,11 @@
 		return @{QCPortAttributeNameKey: @"IRC Channel",
 				 QCPortAttributeDefaultValueKey: @""};
 	}
+	else if ([key isEqualToString:@"inputReconnect"])
+	{
+		return @{QCPortAttributeNameKey: @"Reconnect",
+				 QCPortAttributeDefaultValueKey: @(NO)};
+	}
 	else if ([key isEqualToString:@"outputMessages"])
 	{
 		return @{QCPortAttributeNameKey: @"Messages"};
@@ -75,7 +80,15 @@
 	{
 		return @{QCPortAttributeNameKey: @"Connected"};
 	}
-	
+	else if ([key isEqualToString:@"outputConnectionState"])
+	{
+		return @{QCPortAttributeNameKey: @"Connection State"};
+	}
+	else if ([key isEqualToString:@"outputConnectionError"])
+	{
+		return @{QCPortAttributeNameKey: @"Connection Error"};
+	}
+
 	return nil;
 }
 
@@ -111,7 +124,8 @@
 		![self.oldServer isEqualToString:self.inputServer] ||
 		![self.oldNickname isEqualToString:self.inputNickname] ||
 		![self.oldChannel isEqualToString:self.inputChannel] ||
-		![self.oldPassword isEqualToString:self.inputPassword])
+		![self.oldPassword isEqualToString:self.inputPassword] ||
+		self.inputReconnect)
 	{
 		[self disconnect];
 		[self connect];
@@ -128,6 +142,12 @@
 		self.outputMessages = @[];
 	}
 	
+	if(self.connection)
+	{
+		self.outputConnectionState = self.connection.connectionState;
+		self.outputConnectionError = self.connection.connectionError;
+	}
+
 	return YES;
 }
 

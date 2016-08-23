@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, IRCConnectionState) {
+	IRCConnectionStateDisconnected = 0,
+	IRCConnectionStateConnecting = 1,
+	IRCConnectionStateConnected = 2,
+	IRCConnectionStateReceivingData = 3,
+	IRCConnectionStateConnectionError = 99,
+	
+};
+
 @class IRCMessage;
 
 @interface IRCConnection : NSObject
@@ -54,5 +63,14 @@ typedef void (^IRCConnectionMessageCallback)(IRCMessage * _Nonnull message);
  */
 @property (nonatomic, copy) IRCConnectionMessageCallback _Nullable messageCallback;
 
+/*!
+ * @brief Stores the current connection state
+ */
+@property (nonatomic, assign, readonly) IRCConnectionState connectionState;
+
+/*!
+ * @brief Stores the last connection error
+ */
+@property (atomic, strong, readonly) NSString * _Nullable connectionError;
 
 @end
