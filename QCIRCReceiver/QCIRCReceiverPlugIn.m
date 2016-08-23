@@ -162,7 +162,6 @@
 		
 		IRCConnection *connection = [[IRCConnection alloc] initWithServer:self.inputServer port:self.inputPort serverPassword:password];
 		connection.nickname = self.inputNickname;
-		[connection joinChannel:self.inputChannel];
 		
 		connection.messageCallback = ^void(IRCMessage * _Nonnull message) {
 			//Append message to array
@@ -180,7 +179,9 @@
 				[self.messages removeObjectAtIndex:0];
 			}
 		};
-		
+
+		[connection joinChannel:self.inputChannel];
+
 		self.connection = connection;
 		self.oldPort = self.inputPort;
 		self.oldServer = self.inputServer;
