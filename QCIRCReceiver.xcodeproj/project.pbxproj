@@ -160,6 +160,7 @@
 				TargetAttributes = {
 					B611D98A1CC39ED700D3BA8C = {
 						CreatedOnToolsVersion = 7.3;
+						ProvisioningStyle = Automatic;
 					};
 					B677B8111D4200BD00587500 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -309,7 +310,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B677B80A1D41FDF700587500 /* BuildNumber.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
@@ -324,7 +325,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B677B80A1D41FDF700587500 /* BuildNumber.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
@@ -378,6 +379,7 @@
 				B677B8141D4200BD00587500 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
