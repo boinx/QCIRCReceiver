@@ -31,8 +31,8 @@
 
 @implementation QCIRCReceiverPlugIn
 
-@dynamic inputServer, inputPort, inputNickname, inputPassword, inputChannel;
-@dynamic outputMessages, outputConnected;
+@dynamic inputServer, inputPort, inputNickname, inputPassword, inputChannel, inputReconnect;
+@dynamic outputMessages, outputConnected, outputConnectionState, outputConnectionError;
 
 + (NSDictionary *)attributes
 {
@@ -45,7 +45,7 @@
 	if ([key isEqualToString:@"inputServer"])
 	{
 		return @{QCPortAttributeNameKey: @"Server",
-				 QCPortAttributeDefaultValueKey: @"irc.chat.twitch.tv"};
+				 QCPortAttributeDefaultValueKey: @""};
 	}
 	else if ([key isEqualToString:@"inputPort"])
 	{
@@ -65,7 +65,12 @@
 	else if ([key isEqualToString:@"inputChannel"])
 	{
 		return @{QCPortAttributeNameKey: @"IRC Channel",
-				 QCPortAttributeDefaultValueKey: @"#macpiets"};
+				 QCPortAttributeDefaultValueKey: @""};
+	}
+	else if ([key isEqualToString:@"inputReconnect"])
+	{
+		return @{QCPortAttributeNameKey: @"Reconnect",
+				 QCPortAttributeDefaultValueKey: @(NO)};
 	}
 	else if ([key isEqualToString:@"outputMessages"])
 	{
@@ -75,7 +80,15 @@
 	{
 		return @{QCPortAttributeNameKey: @"Connected"};
 	}
-	
+	else if ([key isEqualToString:@"outputConnectionState"])
+	{
+		return @{QCPortAttributeNameKey: @"Connection State"};
+	}
+	else if ([key isEqualToString:@"outputConnectionError"])
+	{
+		return @{QCPortAttributeNameKey: @"Connection Error"};
+	}
+
 	return nil;
 }
 
@@ -111,7 +124,8 @@
 		![self.oldServer isEqualToString:self.inputServer] ||
 		![self.oldNickname isEqualToString:self.inputNickname] ||
 		![self.oldChannel isEqualToString:self.inputChannel] ||
-		![self.oldPassword isEqualToString:self.inputPassword])
+		![self.oldPassword isEqualToString:self.inputPassword] ||
+		self.inputReconnect)
 	{
 		[self disconnect];
 		[self connect];
@@ -128,6 +142,12 @@
 		self.outputMessages = @[];
 	}
 	
+	if(self.connection)
+	{
+		self.outputConnectionState = self.connection.connectionState;
+		self.outputConnectionError = self.connection.connectionError;
+	}
+
 	return YES;
 }
 
@@ -162,7 +182,6 @@
 		
 		IRCConnection *connection = [[IRCConnection alloc] initWithServer:self.inputServer port:self.inputPort serverPassword:password];
 		connection.nickname = self.inputNickname;
-		[connection joinChannel:self.inputChannel];
 		
 		connection.messageCallback = ^void(IRCMessage * _Nonnull message) {
 			//Append message to array
@@ -180,7 +199,9 @@
 				[self.messages removeObjectAtIndex:0];
 			}
 		};
-		
+
+		[connection joinChannel:self.inputChannel];
+
 		self.connection = connection;
 		self.oldPort = self.inputPort;
 		self.oldServer = self.inputServer;

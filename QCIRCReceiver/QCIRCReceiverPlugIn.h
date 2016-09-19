@@ -16,9 +16,13 @@
 @property (copy) NSString *inputNickname;
 @property (copy) NSString *inputPassword;
 @property (copy) NSString *inputChannel;
+@property BOOL inputReconnect;
 
 //Outputs
 @property (copy) NSArray *outputMessages;
+@property NSUInteger outputConnectionState;
+@property NSString *outputConnectionError;
+
 @property BOOL outputConnected;
 
 @end
