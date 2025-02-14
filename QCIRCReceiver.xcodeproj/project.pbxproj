@@ -342,6 +342,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.15.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.macpietsapps.QCIRCReceiver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -359,6 +360,7 @@
 				COPY_PHASE_STRIP = YES;
 				INFOPLIST_FILE = QCIRCReceiver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.15.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.macpietsapps.QCIRCReceiver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
